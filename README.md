@@ -1,7 +1,8 @@
 # anime.alexischao.com
 
 A stylized, read-only view of my [AniList](https://anilist.co) anime list. Part of the
-`alexischao.com` family of subdomains, sharing a design system (`src/theme.css`).
+`alexischao.com` family of subdomains, sharing a design system loaded live from
+[`alexischao.com/theme.css`](https://alexischao.com/theme.css).
 
 There is no manual data entry here — AniList is the source of truth, and the site
 rebuilds itself on a schedule.

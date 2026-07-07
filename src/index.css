@@ -24,8 +24,7 @@ h1, h2, p {
 }
 
 .page-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .page-subtitle {
@@ -215,7 +214,7 @@ h1, h2, p {
   }
 
   .page-title {
-    font-size: 1.6rem;
+    font-size: 1.1rem;
   }
 }
 
