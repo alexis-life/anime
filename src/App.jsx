@@ -29,44 +29,49 @@ export default function App() {
   const fetchedAt = new Date(data.fetchedAt);
 
   return (
-    <div className="page">
-      <header className="page-header">
-        <h1 className="title-lg page-title">anime</h1>
-        <p className="text-meta page-subtitle">{data.username}'s AniList, always up to date</p>
+    <>
+      <header className="topbar">
+        <div className="topbar-titles">
+          <h1 className="title-lg page-title">Anime Status</h1>
+          <p className="text-meta page-subtitle">{data.username}'s AniList, always up to date</p>
+        </div>
+        <div className="topbar-nav">
+          <div className="topbar-nav-inner">
+            <StatusTabs groups={allGroups} activeTab={activeTab} onChange={setActiveTab} />
+            <input
+              type="search"
+              className="search-box"
+              placeholder="Search titles…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </div>
       </header>
 
-      <div className="controls">
-        <StatusTabs groups={allGroups} activeTab={activeTab} onChange={setActiveTab} />
-        <input
-          type="search"
-          className="search-box"
-          placeholder="Search titles…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+      <div className="page">
+        <main>
+          {visibleGroups.length === 0 && (
+            <p className="text-meta empty-state">No anime match your search.</p>
+          )}
+          {visibleGroups.map((group) => (
+            <section key={group.key} className="anime-section">
+              <h2 className="section-header">
+                {group.key} <span className="count-pill">{group.entries.length}</span>
+              </h2>
+              <div className="anime-grid">
+                {group.entries.map((anime) => (
+                  <AnimeCard key={anime.siteUrl} anime={anime} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </main>
+
+        <footer className="page-footer text-meta">
+          Last updated {fetchedAt.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+        </footer>
       </div>
-
-      <main>
-        {visibleGroups.length === 0 && (
-          <p className="text-meta empty-state">No anime match your search.</p>
-        )}
-        {visibleGroups.map((group) => (
-          <section key={group.key} className="anime-section">
-            <h2 className="section-header">
-              {group.key} <span className="count-pill">{group.entries.length}</span>
-            </h2>
-            <div className="anime-grid">
-              {group.entries.map((anime) => (
-                <AnimeCard key={anime.siteUrl} anime={anime} />
-              ))}
-            </div>
-          </section>
-        ))}
-      </main>
-
-      <footer className="page-footer text-meta">
-        Last updated {fetchedAt.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
-      </footer>
-    </div>
+    </>
   );
 }
