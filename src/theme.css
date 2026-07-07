@@ -1,0 +1,144 @@
+/* ============================================================
+   alexischao.com — Shared Theme
+   Canonical source: data.alexischao.com (style.css)
+   Confirmed consistent with: cysa.alexischao.com
+   ============================================================
+
+   SUGGESTED CLAUDE PROMPT:
+   "Use the alexischao.com theme — c1–c9 rose scale, #f9f4f5 page bg,
+   Poppins, 10px card radius, rgba(82,46,56,0.08) shadow" and paste
+   this file in — that alone should get consistent output every time
+   without re-deriving colors from scratch.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── Color scale (light → dark) ───────────────────── */
+  --c1: #ffe0e9; /* lightest blush   — active nav bg, badge bg, dividers */
+  --c2: #ffc2d4; /* light pink       — borders, input borders */
+  --c3: #ff9ebb; /* soft pink        — bullets, chevrons, meta text */
+  --c4: #ff7aa2; /* mid pink         — tertiary accent */
+  --c5: #e05780; /* rose             — mid-emphasis badges (white text on top) */
+  --c6: #b9375e; /* PRIMARY rose     — brand, active states, buttons, links */
+  --c7: #8a2846; /* deep rose        — secondary/label text */
+  --c8: #602437; /* darkest rose     — high-contrast badge text */
+  --c9: #522e38; /* body text        — warm brown-rose, not pure black */
+
+  /* ── Surfaces ──────────────────────────────────────── */
+  --bg-page: #f9f4f5;
+  --bg-surface: #fff;
+  --bg-hover: #fff0f3;
+
+  /* ── Layout ────────────────────────────────────────── */
+  --sidebar-w: 260px;
+  --topbar-h: 60px;
+  --content-pad: 28px;
+
+  /* ── Shape / elevation ─────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 6px rgba(82, 46, 56, 0.08);
+  --shadow-popover: 0 4px 16px rgba(122, 35, 72, 0.12);
+
+  /* ── Semantic (from cysa quiz states) ─────────────── */
+  --success: #3F8F5F;
+  --success-bg: rgba(63, 143, 95, 0.07);
+  --error: #C24444;
+  --error-bg: rgba(194, 68, 68, 0.07);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-page);
+  color: var(--c9);
+  min-height: 100vh;
+}
+
+/* ── Typography scale ──────────────────────────────── */
+h1, .title-lg   { font-size: 1.1rem; font-weight: 700; color: var(--c9); letter-spacing: -0.01em; }
+.label-micro     { font-size: 0.7rem; font-weight: 600; color: var(--c7); text-transform: uppercase; letter-spacing: 0.06em; }
+.text-body       { font-size: 0.85rem; font-weight: 400; color: var(--c9); }
+.text-meta       { font-size: 0.78rem; font-weight: 400; color: var(--c7); }
+
+/* ── Card ──────────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 20px 24px;
+}
+.card-bordered {
+  background: var(--bg-surface);
+  border: 1px solid var(--c1);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Stat card (accent left border, rotate c6→c3) ─── */
+.stat-card { border-left: 4px solid var(--c6); }
+.stat-card.sp1 { border-left-color: var(--c6); }
+.stat-card.sp2 { border-left-color: var(--c5); }
+.stat-card.sp3 { border-left-color: var(--c4); }
+.stat-card.sp4 { border-left-color: var(--c3); }
+.stat-value { font-size: 2rem; font-weight: 700; color: var(--c6); line-height: 1.1; }
+
+/* ── Buttons ───────────────────────────────────────── */
+.btn-primary {
+  background: var(--c6);
+  color: #fff;
+  border: 1px solid var(--c6);
+  border-radius: var(--radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.btn-secondary {
+  background: rgba(185, 55, 94, 0.08);
+  color: var(--c6);
+  border: 1px solid var(--c6);
+  border-radius: var(--radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+/* ── Badges / pills ────────────────────────────────── */
+.badge { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 2px 10px; border-radius: var(--radius-pill); white-space: nowrap; }
+.badge-primary { background: var(--c1); color: var(--c6); }
+.badge-strong  { background: var(--c7); color: var(--c1); }
+.badge-mid     { background: var(--c5); color: #fff; }
+.count-pill    { background: rgba(185,55,94,0.10); color: var(--c6); font-size: 0.75rem; font-weight: 600; padding: 2px 10px; border-radius: var(--radius-pill); }
+
+/* ── Inputs ────────────────────────────────────────── */
+input, select, textarea {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  color: var(--c9);
+  background: var(--bg-surface);
+  border: 1px solid var(--c2);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--c6); }
+
+/* ── Table ─────────────────────────────────────────── */
+table { width: 100%; border-collapse: separate; border-spacing: 0; }
+th { background: var(--bg-hover); font-size: 0.7rem; font-weight: 600; color: var(--c7); text-transform: uppercase; letter-spacing: 0.05em; padding: 10px 16px; text-align: left; }
+td { font-size: 0.85rem; color: var(--c9); padding: 10px 16px; border-bottom: 1px solid var(--c1); }
+tbody tr:hover td { background: var(--bg-hover); }
+
+/* ── Nav item (sidebar pattern) ────────────────────── */
+.nav-item { padding: 0 20px; height: 38px; font-size: 0.875rem; font-weight: 500; color: var(--c8); display: flex; align-items: center; cursor: pointer; }
+.nav-item:hover { background: var(--bg-hover); }
+.nav-item.active { background: var(--c1); color: var(--c6); border-left: 3px solid var(--c6); padding-left: 17px; }
