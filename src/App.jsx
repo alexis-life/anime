@@ -32,15 +32,15 @@ export default function App() {
     <>
       <header className="topbar">
         <div className="topbar-titles">
-          <h1 className="title-lg page-title">Anime Status</h1>
-          <p className="text-meta page-subtitle">{data.username}'s AniList, always up to date</p>
+          <h1 className="title-lg">Anime Status</h1>
+          <p className="text-meta">{data.username}'s AniList, always up to date</p>
         </div>
         <div className="topbar-nav">
           <div className="topbar-nav-inner">
             <StatusTabs groups={allGroups} activeTab={activeTab} onChange={setActiveTab} />
             <input
               type="search"
-              className="search-box"
+              className="topbar-search"
               placeholder="Search titles…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}

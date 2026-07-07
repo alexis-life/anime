@@ -6,95 +6,6 @@ h1, h2, p {
   margin: 0;
 }
 
-/* ── Topbar ───────────────────────────────────────────── */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--c2);
-}
-
-.topbar-titles {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 28px var(--content-pad) 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.page-title {
-  font-size: 1.1rem;
-}
-
-.page-subtitle {
-  color: var(--c7);
-}
-
-.topbar-nav {
-  border-top: 1px solid var(--c1);
-}
-
-.topbar-nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--content-pad);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.nav-tabs {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  overflow-x: auto;
-}
-
-.nav-tab {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--c7);
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 15px 0;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.nav-tab:hover {
-  color: var(--c6);
-}
-
-.nav-tab.is-active {
-  color: var(--c6);
-  border-bottom-color: var(--c6);
-}
-
-.nav-tab-count {
-  color: var(--c4);
-  font-weight: 600;
-}
-
-.nav-tab.is-active .nav-tab-count {
-  color: var(--c6);
-}
-
-.search-box {
-  margin-left: auto;
-  min-width: 180px;
-  max-width: 240px;
-  border-radius: var(--radius-pill);
-  padding: 8px 14px;
-  font-size: 0.78rem;
-}
-
 .page {
   max-width: 1200px;
   margin: 0 auto;
@@ -224,22 +135,6 @@ h1, h2, p {
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 640px) {
-  .topbar-titles {
-    padding: 20px 16px 14px;
-  }
-
-  .topbar-nav-inner {
-    padding: 10px 16px;
-    flex-wrap: wrap;
-  }
-
-  .search-box {
-    margin-left: 0;
-    max-width: none;
-    flex: 1 1 100%;
-    order: 2;
-  }
-
   .page {
     padding: 28px 16px 32px;
   }
@@ -247,10 +142,6 @@ h1, h2, p {
   .anime-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-  }
-
-  .page-title {
-    font-size: 1.1rem;
   }
 }
 
