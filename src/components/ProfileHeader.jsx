@@ -51,21 +51,25 @@ export default function ProfileHeader({ profile }) {
       {banner && (
         <div className="profile-banner" style={{ backgroundImage: `url(${banner})` }} />
       )}
-      <div className="profile-identity">
-        {avatar && <img className="profile-avatar" src={avatar} alt={name} />}
-        <span className="profile-name">{name}</span>
-      </div>
+      <div className="profile-content">
+        <div className="profile-identity">
+          {avatar && <img className="profile-avatar" src={avatar} alt={name} />}
+          <span className="profile-name">{name}</span>
+        </div>
 
-      <div className="profile-stats-grid">
-        <StatCard label="Total Anime" value={anime.count} />
-        <StatCard label="Days Watched" value={anime.daysWatched} />
-        <StatCard label="Anime Mean Score" value={anime.meanScore} />
-        <StatCard label="Total Manga" value={manga.count} />
-        <StatCard label="Chapters Read" value={manga.chaptersRead} />
-        <StatCard label="Manga Mean Score" value={manga.meanScore} />
-      </div>
+        <div className="profile-overlay">
+          <div className="profile-stats-grid">
+            <StatCard label="Total Anime" value={anime.count} />
+            <StatCard label="Days Watched" value={anime.daysWatched} />
+            <StatCard label="Anime Mean Score" value={anime.meanScore} />
+            <StatCard label="Total Manga" value={manga.count} />
+            <StatCard label="Chapters Read" value={manga.chaptersRead} />
+            <StatCard label="Manga Mean Score" value={manga.meanScore} />
+          </div>
 
-      <GenreBar genres={anime.genres} />
+          <GenreBar genres={anime.genres} />
+        </div>
+      </div>
     </section>
   );
 }

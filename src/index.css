@@ -17,32 +17,46 @@ h1, h2, p {
 }
 
 /* ── Profile header ───────────────────────────────────────
-   A fixed-height banner strip (like AniList's own profile page) with
-   the avatar overlapping its bottom edge, and stats/genre bar living
-   below on the card's plain surface — not overlaid on the photo.
-   background-size: contain guarantees the whole banner image is
-   always visible (no cropping), letterboxed against the theme's
-   blush color with a wide, gradual fade instead of a hard edge.    */
+   A tall banner photo (background-size: cover, full-bleed, no
+   letterboxing) with identity+stats+genre anchored to its bottom via
+   a bottom-packed flex column. Only the stats/genre block sits on
+   the translucent blurred panel — the identity row (avatar + name)
+   stays directly on the clear photo, unblurred, right above it.    */
 .profile-header {
-  background: var(--bg-surface);
+  position: relative;
+  height: 460px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
 .profile-banner {
-  height: 260px;
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: top right;
   background-color: var(--c1);
+}
+
+.profile-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.profile-overlay {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .profile-identity {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 0 24px;
-  margin-top: -34px;
+  padding: 0 24px 16px;
 }
 
 .profile-avatar {
@@ -55,10 +69,12 @@ h1, h2, p {
 }
 
 .profile-name {
-  margin-top: 24px;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--c9);
+  text-shadow:
+    0 0 3px var(--bg-surface), 0 0 6px var(--bg-surface),
+    0 0 10px var(--bg-surface), 0 0 16px var(--bg-surface);
 }
 
 .profile-stats-grid {
@@ -147,11 +163,11 @@ h1, h2, p {
 }
 
 @media (max-width: 640px) {
-  .profile-banner {
-    height: 160px;
+  .profile-header {
+    height: 540px;
   }
   .profile-identity {
-    padding: 0 16px;
+    padding: 0 16px 16px;
   }
   .profile-stats-grid {
     grid-template-columns: repeat(2, 1fr);
