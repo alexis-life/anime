@@ -21,7 +21,7 @@ query ($userName: String, $chunk: Int, $perChunk: Int) {
       entries {
         id
         status
-        score
+        scorePercent: score(format: POINT_100)
         progress
         updatedAt
         media {
@@ -32,6 +32,32 @@ query ($userName: String, $chunk: Int, $perChunk: Int) {
           genres
           siteUrl
         }
+      }
+    }
+  }
+}
+`;
+
+// Profile header data: avatar/banner + anime & manga statistics, fetched
+// once (not chunked/paged like the list above).
+const PROFILE_QUERY = `
+query ($userName: String) {
+  User(name: $userName) {
+    name
+    avatar { large }
+    bannerImage
+    statistics {
+      anime {
+        count
+        meanScore
+        minutesWatched
+        genres(sort: COUNT_DESC) { genre count }
+      }
+      manga {
+        count
+        meanScore
+        chaptersRead
+        genres(sort: COUNT_DESC) { genre count }
       }
     }
   }
@@ -63,6 +89,49 @@ async function fetchChunk(chunk, perChunk) {
   return json.data.MediaListCollection;
 }
 
+async function fetchProfile() {
+  const res = await fetch(ANILIST_API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      query: PROFILE_QUERY,
+      variables: { userName: ANILIST_USERNAME },
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    throw new Error(`AniList profile request failed: ${res.status} ${res.statusText} ${body}`);
+  }
+
+  const json = await res.json();
+  if (json.errors) {
+    throw new Error(`AniList profile API error: ${JSON.stringify(json.errors)}`);
+  }
+
+  const user = json.data.User;
+  return {
+    name: user.name,
+    avatar: user.avatar?.large || null,
+    banner: user.bannerImage || null,
+    anime: {
+      count: user.statistics.anime.count,
+      meanScore: user.statistics.anime.meanScore,
+      daysWatched: Math.round((user.statistics.anime.minutesWatched / 60 / 24) * 10) / 10,
+      genres: user.statistics.anime.genres.map((g) => ({ genre: g.genre, count: g.count })),
+    },
+    manga: {
+      count: user.statistics.manga.count,
+      meanScore: user.statistics.manga.meanScore,
+      chaptersRead: user.statistics.manga.chaptersRead,
+      genres: user.statistics.manga.genres.map((g) => ({ genre: g.genre, count: g.count })),
+    },
+  };
+}
+
 function normalizeEntry(entry) {
   const { media } = entry;
   return {
@@ -76,7 +145,7 @@ function normalizeEntry(entry) {
     genres: media.genres,
     siteUrl: media.siteUrl,
     status: entry.status,
-    score: entry.score || null,
+    scorePercent: entry.scorePercent || null,
     progress: entry.progress || 0,
     updatedAt: entry.updatedAt,
   };
@@ -101,10 +170,12 @@ async function main() {
   }
 
   const entries = [...entriesById.values()].sort((a, b) => b.updatedAt - a.updatedAt);
+  const profile = await fetchProfile();
 
   const payload = {
     username: ANILIST_USERNAME,
     fetchedAt: new Date().toISOString(),
+    profile,
     entries,
   };
 

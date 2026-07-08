@@ -1,5 +1,5 @@
 export default function StatusTabs({ groups, activeTab, onChange }) {
-  const tabs = [{ key: 'All', count: groups.reduce((sum, g) => sum + g.entries.length, 0) }, ...groups.map((g) => ({ key: g.key, count: g.entries.length }))];
+  const tabs = [{ key: 'Overview', count: groups.reduce((sum, g) => sum + g.entries.length, 0) }, ...groups.map((g) => ({ key: g.key, count: g.entries.length }))];
 
   return (
     <nav className="nav-tabs">
