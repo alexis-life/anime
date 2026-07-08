@@ -38,6 +38,9 @@ jobs:
       - name: Fetch AniList data
         run: npm run fetch-data
 
+      - name: Generate OG image
+        run: npm run og-image
+
       - name: Build
         run: npm run build
 
