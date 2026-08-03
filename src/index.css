@@ -495,6 +495,39 @@ main {
   font-weight: 500;
 }
 
+/* ── Recommended tab ──────────────────────────────────── */
+.recommended-banner {
+  margin-bottom: 4px;
+}
+
+.recommended-banner-sub {
+  max-width: 60ch;
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+}
+
+.recommended-badge.is-airing {
+  background: var(--c6);
+}
+
+.recommended-reason {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 .anime-card-title {
   font-size: 0.82rem;
   font-weight: 600;

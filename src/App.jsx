@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react';
 import data from './data/anime.json';
+import recommendations from './data/recommendations.json';
 import { groupEntries } from './utils/groups';
 import StatusTabs from './components/StatusTabs';
 import AnimeCard from './components/AnimeCard';
 import ProfileHeader from './components/ProfileHeader';
 import HighlightRow from './components/HighlightRow';
 import StatsSection from './components/StatsSection';
+import RecommendedSection from './components/RecommendedSection';
 
 const HIGHLIGHT_COUNT = 6;
 
@@ -61,7 +63,12 @@ export default function App() {
         </div>
         <div className="topbar-nav">
           <div className="topbar-nav-inner">
-            <StatusTabs groups={allGroups} activeTab={activeTab} onChange={setActiveTab} />
+            <StatusTabs
+              groups={allGroups}
+              activeTab={activeTab}
+              onChange={setActiveTab}
+              recommendedCount={recommendations.items.length}
+            />
             <input
               type="search"
               className="topbar-search"
@@ -80,6 +87,10 @@ export default function App() {
             <HighlightRow title="Continue Watching" entries={continueWatching} />
             <HighlightRow title="Recently Completed" entries={recentlyCompleted} />
             <StatsSection entries={data.entries} />
+          </main>
+        ) : activeTab === 'Recommended' ? (
+          <main>
+            <RecommendedSection recommendations={recommendations} />
           </main>
         ) : (
           <main>

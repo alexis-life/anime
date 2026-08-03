@@ -2,9 +2,8 @@
 export const STATUS_GROUPS = [
   { key: 'Watching', statuses: ['CURRENT', 'REPEATING'] },
   { key: 'Completed', statuses: ['COMPLETED'] },
-  { key: 'Paused', statuses: ['PAUSED'] },
+  { key: 'Paused / Dropped', statuses: ['PAUSED', 'DROPPED'] },
   { key: 'Planning', statuses: ['PLANNING'] },
-  { key: 'Dropped', statuses: ['DROPPED'] },
 ];
 
 export function groupKeyForStatus(status) {

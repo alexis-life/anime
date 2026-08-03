@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "fetch-data": "node scripts/fetch-anilist.js",
+    "fetch-recommendations": "node scripts/fetch-recommendations.js",
     "og-image": "node scripts/generate-og-image.js"
   },
   "dependencies": {
