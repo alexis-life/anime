@@ -164,13 +164,13 @@ h1, h2, p {
 
 @media (max-width: 640px) {
   .profile-header {
-    height: 320px;
+    height: 340px;
   }
   .profile-banner {
-    background-position: center;
+    background-position: right;
   }
   .profile-identity {
-    padding: 0 16px 10px;
+    padding: 10px 16px 10px;
   }
   .profile-stats-grid {
     grid-template-columns: repeat(3, 1fr);
