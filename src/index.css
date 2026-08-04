@@ -164,17 +164,24 @@ h1, h2, p {
 
 @media (max-width: 640px) {
   .profile-header {
-    height: 540px;
+    height: 400px;
+  }
+  .profile-banner {
+    background-position: center;
   }
   .profile-identity {
     padding: 0 16px 16px;
   }
   .profile-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     padding: 16px 16px 0;
   }
+  .profile-stat-card {
+    padding: 10px 6px;
+  }
   .genre-overview {
-    padding: 16px 16px 20px;
+    padding: 14px 16px 18px;
   }
 }
 
